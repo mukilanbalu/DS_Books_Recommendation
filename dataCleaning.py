@@ -126,18 +126,29 @@ df.to_csv('cleaned.csv', index=False)
 from ast import literal_eval
 
 #converting list stored as string to list using eval
-#df['genres']= df['genres'].apply(literal_eval)
 
-genres= df['genres']
-#
+df['genres']= df['genres'].apply(literal_eval)
+
 df['gen_count']= df['genres'].apply(lambda x: len(x))
 
-#df['genres'].str.len().agg(['mean','max','min'])
-                    
-#print(len(genres[2345]))
-##df["genres"].str.len().min()
+#counting unqiue genres
 
+genres= df[['genres']]
 
+genUniq= list(genres['genres'].apply(pd.Series).stack().unique())
+
+genUniq[4]
+
+#%%
+
+from ast import literal_eval
+
+#converting list stored as string to list using eval
+df['awards']= df['awards'].apply(literal_eval)
+
+awards= df['awards'].apply(literal_eval)
+
+df['no_of_awards']= df.awards.map(lambda x: len(x))
 
 
 
